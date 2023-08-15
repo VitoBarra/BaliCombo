@@ -87,6 +87,7 @@ def Generate_random_data(n,m)-> list[BaliTrick]:
                 trick.Level = random.choice(list(LevelEnum))
                 trick.Category = CategoryEnum(o)
                 trick.Difficulty = random.randint(1,10)
+                trick.Coolness = random.randint(1,10)
                 
                 start_grip = GripHandle(random.choice(list(Grip)), random.choice(list(Handle)))
                 end_grip = GripHandle(random.choice(list(Grip)), random.choice(list(Handle)))

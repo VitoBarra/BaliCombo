@@ -10,7 +10,7 @@ FILE_NAME ="BaliData/TrickData.json";
 tdm = TrickDataManager(BaliTrickjsonManager(FILE_NAME))
 
 
-#BaliTricks = tdm.GenerateData(5,65)
+BaliTricks = tdm.GenerateData(5,65)
 BaliTricks = tdm.ReadData();
 
 
@@ -23,7 +23,8 @@ ToyTest = [BaliTricksFiltered[0],BaliTricksFiltered[1],BaliTricksFiltered[2],Bal
 
 
 
-N_closure = su.GenerateNclosure(10,ToyTest) 
+N_closure = su.GenerateNclosure(3,ToyTest) 
+
 
 
 PrintClosure(N_closure)

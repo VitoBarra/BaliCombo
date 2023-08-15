@@ -13,8 +13,12 @@ def GenerateTrickGroup(BaliTricks: list[BaliTrick]):
     return TrickGroup
 
 
-def FilterParamether(BaliTricks:list[BaliTrick], MinDif=0,MaxDif=10,MinLevel=0,MaxLevel=5,Category = []):
-    return [trick for trick in BaliTricks if MinDif<=trick.Difficulty<=MaxDif and MinLevel<=trick.Level.value<=MaxLevel and all(trick.Category.value != cat.value for cat in Category)  ]
+def FilterParamether(BaliTricks:list[BaliTrick], MinDif=0,MaxDif=10,MinLevel=0,MaxLevel=5,MinCool=1,MaxCool=10,Category = []):
+    return [trick for trick in BaliTricks 
+            if MinDif<=trick.Difficulty<=MaxDif and 
+            MinLevel<=trick.Level.value<=MaxLevel and
+            MinCool<=trick.Coolness<=MaxCool and
+            all(trick.Category.value != cat.value for cat in Category)]
 
 def GenerateClosure(TrickAccumulator,TrickGroup):
         resoults = {}
@@ -38,9 +42,16 @@ def GenerateNclosure(n,TrickList):
         nClosure = GenerateClosure(nClosure,TrickGroup)
     return  nClosure
 
+def CalcuateSequenceStat(TrickSequence:list[BaliTrick]):
+
+    if len(TrickSequence)==0: return (0,0) 
+    DefficutlyAverage = sum([trick.Difficulty for trick in TrickSequence])/len(TrickSequence)
+    CoolnessAverage = sum([trick.Coolness for trick in TrickSequence])/len(TrickSequence)
+    return (DefficutlyAverage,CoolnessAverage)
+
     
-def Serch(TrickGroup,StartGrip:GripHandle,EndGrip:GripHandle):
-    StartTrick = [trickKey for trickKey in list(TrickGroup.keys()) if trickKey[0]==StartGrip.GripHandleCode]
+def Serch(closure,StartGrip:GripHandle,EndGrip:GripHandle):
+    return closure[StartGrip.GripHandleCode,EndGrip.GripHandleCode]
     
     
 

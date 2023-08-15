@@ -1,15 +1,18 @@
 
 # a closure is a transitive transaction closure of a set of trick
+from SerchUtil import CalcuateSequenceStat
+
+
 def PrintClosure(closure):
 
     print("il numero di trick Trovti è :",CountTrinck(closure))
     for i in list(closure.keys()):
         print("con la transizione",i,":")
-        for tricks in closure[i]:
-            combo =[] 
-            for trick in tricks:
-                combo.append(trick.id)
-            print(combo, end=",  ")
+        for ComboTrick in closure[i]:
+            comboId =[] 
+            for trick in ComboTrick:
+                comboId.append(trick.id)
+            print("{",comboId,CalcuateSequenceStat(ComboTrick),"}",  end=",  ")
         print()
         
         
