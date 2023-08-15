@@ -29,6 +29,12 @@ class GripHandle:
     def __init__(self,grip =Grip.Basic,handle =Handle.Safe) -> None:
         self.Grip = grip
         self.Handle = handle
+        self.GripHandleCode = self.GetGripHandleCode()
+    
+    def __init__(self,grip:int =0,handle:int =0) -> None:
+        self.Grip = Grip(grip)
+        self.Handle = Handle(handle)
+        self.GripHandleCode = self.GetGripHandleCode()
         
     def GetGripHandleCode(self):
         return (self.Grip.value + self.Handle.value)
@@ -38,22 +44,24 @@ class GripHandle:
 
 class BaliTrick:
     def __init__(self, id=0, Name="PlaceHolder", StartGrip:GripHandle= GripHandle(), EndGrip:GripHandle=GripHandle(),
-                 Difficulty=1, Category=CategoryEnum.Desterity, level=LevelEnum.Begginer) -> None:
+                 Difficulty=1, Coolness=1,Category=CategoryEnum.Desterity, level=LevelEnum.Begginer) -> None:
         self.id = id
         self.Name = Name
         self.StartGrip:GripHandle = StartGrip
         self.EndGrip:GripHandle = EndGrip
         self.Difficulty = Difficulty
+        self.Coolness = Coolness
         self.Category = Category
         self.Level = level
         
     def __init__(self, id=0, Name="PlaceHolder", StartGrip:(int,int)=(0,0), EndGrip:(int,int)=(0,0),
-                 Difficulty=1, Category:int=0, Level:int=0) -> None:
+                 Difficulty=1,  Coolness=1,Category:int=0, Level:int=0) -> None:
         self.id = id
         self.Name = Name
-        self.StartGrip:GripHandle =  GripHandle(StartGrip[0],StartGrip[0])
-        self.EndGrip:GripHandle = GripHandle(EndGrip[0],EndGrip[0])
+        self.StartGrip:GripHandle =  GripHandle(StartGrip[0],StartGrip[1])
+        self.EndGrip:GripHandle = GripHandle(EndGrip[0],EndGrip[1])
         self.Difficulty = Difficulty
+        self.Coolness = Coolness
         self.Category = CategoryEnum(Category)
         self.Level = LevelEnum(Level)
         
@@ -64,6 +72,7 @@ class BaliTrick:
             "StartGrip": (self.StartGrip.Grip, self.StartGrip.Handle),
             "EndGrip": (self.EndGrip.Grip, self.EndGrip.Handle),
             "Difficulty": self.Difficulty,
+            "Coolness": self.Coolness,
             "Category": self.Category,
             "Level": self.Level
         }
